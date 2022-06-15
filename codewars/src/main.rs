@@ -6,7 +6,7 @@ fn main() {
     input_set.push(['C', 'd'].iter().cloned().collect());
     destroy(input_set);
 }
-
+//https://www.codewars.com/kata/52f5424d0531259cfc000d04
 fn sort_by_bit(list: &[u8]) -> u32 {
     if list.len() < 1 {
         return 0;
