@@ -118,3 +118,45 @@ mod destroytests {
         );
     }
 }
+//https://www.codewars.com/kata/588e68aed4cff457d300002e/train/rust
+fn turn(current: char, target: char) -> String {
+    let directions = ['N', 'E', 'S', 'W'];
+    if current == 'W' && target == 'N' {
+        return String::from("right");
+    } else if current == 'N' && target == 'W' {
+        return String::from("left");
+    } else {
+        let pos_cur = directions.iter().position(|&s| s == current);
+        let pos_target = directions.iter().position(|&s| s == target);
+        if pos_cur < pos_target {
+            return String::from("right");
+        } else {
+            return String::from("left");
+        }
+    }
+}
+#[cfg(test)]
+mod testturn {
+    use super::*;
+
+    #[test]
+    fn test() {
+        let fixed_test_cases = [
+            ("Facing N", [('N', 'E', "right"), ('N', 'W', "left")]),
+            ("Facing S", [('S', 'E', "left"), ('S', 'W', "right")]),
+            ("Facing E", [('E', 'N', "left"), ('E', 'S', "right")]),
+            ("Facing W", [('W', 'N', "right"), ('W', 'S', "left")]),
+        ];
+        for (description, test) in fixed_test_cases {
+            for (current, target, answer) in test {
+                assert_eq!(
+                    turn(current, target),
+                    answer,
+                    "Test failed {} to {}",
+                    description,
+                    target
+                );
+            }
+        }
+    }
+}
