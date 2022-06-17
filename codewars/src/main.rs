@@ -169,9 +169,32 @@ enum Direction {
 }
 
 fn dir_reduc(arr: &[Direction]) -> Vec<Direction> {
-    for d in arr.iter() {
-        if d == Direction::North {}
+    println!("{:?}", arr);
+    let mut stack: Vec<Direction> = vec![arr[0]];
+    for (i, d) in arr.iter().enumerate() {
+        if i == 0 {
+            continue;
+        }
+        if stack.len() < 1 {
+            stack.push(*d);
+            continue;
+        }
+        let v = stack.pop().unwrap();
+
+        if (v == Direction::North && d == &Direction::South)
+            || (v == Direction::South && d == &Direction::North)
+            || (v == Direction::West && d == &Direction::East)
+            || (v == Direction::East && d == &Direction::West)
+        {
+            println!("opposites");
+            continue;
+        } else {
+            stack.push(v);
+            stack.push(*d)
+        }
+        println!("{:?}", stack);
     }
 
-    return vec![Direction::North];
+    return stack;
 }
+//fuuuuuuuuck yes

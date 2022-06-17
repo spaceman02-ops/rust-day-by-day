@@ -9,3 +9,4 @@ edition = "2021"
 [dependencies]
 unicode-segmentation = "1.9.0"
 colored = "2.0.0"
+rand = "0.8.5"
