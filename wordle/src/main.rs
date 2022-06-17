@@ -1,18 +1,26 @@
 use colored::Colorize;
+use rand::Rng;
 use std::{fs, io};
 use unicode_segmentation::UnicodeSegmentation;
 fn main() {
     let filename = "validWords.txt";
-    let contents = fs::read_to_string(filename)
+    let contents: Vec<String> = fs::read_to_string(filename)
         .expect("Something went wrong reading the file")
         .split("\n")
         .map(|w| String::from(w))
         .collect();
+
+    let dictionary: Vec<String> = fs::read_to_string("possibleWords.txt")
+        .expect("Something went wrong reading the file")
+        .split("\n")
+        .map(|w| String::from(w))
+        .collect();
+    let secret_word: String = String::from(&dictionary[rand::thread_rng().gen_range(1..101)]);
     let mut w = Wordle {
         guesses: Vec::new(),
         guess: String::from(""),
         valid_words: contents,
-        target_word: String::from("clean"),
+        target_word: secret_word,
     };
     w.game()
 }
