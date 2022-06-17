@@ -160,3 +160,18 @@ mod testturn {
         }
     }
 }
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Direction {
+    North,
+    East,
+    West,
+    South,
+}
+
+fn dir_reduc(arr: &[Direction]) -> Vec<Direction> {
+    for d in arr.iter() {
+        if d == Direction::North {}
+    }
+
+    return vec![Direction::North];
+}
