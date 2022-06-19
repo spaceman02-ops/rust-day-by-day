@@ -1,0 +1,1 @@
+/Users/johnrichardson/Documents/projects/rust-day-by-day/aoc2015/day03/target/debug/day03: /Users/johnrichardson/Documents/projects/rust-day-by-day/aoc2015/day03/src/input.txt /Users/johnrichardson/Documents/projects/rust-day-by-day/aoc2015/day03/src/main.rs
