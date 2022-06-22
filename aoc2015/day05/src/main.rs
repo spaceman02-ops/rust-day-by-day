@@ -1,5 +1,6 @@
 use fancy_regex::Regex;
 use lazy_static::lazy_static;
+
 fn main() {
     let i: Vec<String> = include_str!("input.txt")
         .split("\n")
@@ -21,11 +22,13 @@ fn main() {
     println!("Nice: {}, Naughty: {}", p1.nice, p1.naughty);
     println!("Nice: {}, Naughty: {}", p2.nice, p2.naughty);
 }
+
 struct PartOneMatcher {
     naughty: i32,
     nice: i32,
     list: Vec<String>,
 }
+
 impl PartOneMatcher {
     fn check_vowels(&self, k: &String) -> i32 {
         let mut score = 0;
@@ -36,14 +39,12 @@ impl PartOneMatcher {
         }
         return score;
     }
-
     fn check_double(&self, k: &String) -> bool {
         lazy_static! {
             static ref RE: Regex = Regex::new(r"(.)\1").unwrap();
         }
         RE.is_match(&k).unwrap()
     }
-
     fn check_banned(&self, k: &String) -> bool {
         for x in vec!["ab", "cd", "pq", "xy"].iter() {
             if k.contains(x) {
@@ -52,7 +53,6 @@ impl PartOneMatcher {
         }
         return true;
     }
-
     fn find_out(&mut self) {
         for x in self.list.iter() {
             if self.check_vowels(x) > 2 && self.check_double(x) && self.check_banned(x) {
