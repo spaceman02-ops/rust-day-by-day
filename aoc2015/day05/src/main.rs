@@ -51,7 +51,7 @@ impl PartOneMatcher {
                 return false;
             }
         }
-        return true;
+        true
     }
     fn find_out(&mut self) {
         for x in self.list.iter() {
