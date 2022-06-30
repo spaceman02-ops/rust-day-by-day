@@ -198,3 +198,36 @@ fn dir_reduc(arr: &[Direction]) -> Vec<Direction> {
     return stack;
 }
 //fuuuuuuuuck yes
+fn rot13(message: &str) -> String {
+    println!("{:?}", message);
+    let mut out = String::new();
+    let alphabet = vec![
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+        's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    ];
+    let upper_alphabet: Vec<char> = alphabet.iter().map(|x| x.to_ascii_uppercase()).collect();
+
+    for x in message.chars() {
+        if !x.is_ascii_alphabetic() {
+            out.push(x);
+            continue;
+        } else {
+            if x.is_lowercase() {
+                let pos = alphabet.iter().position(|y| x == *y).unwrap();
+                if pos + 13 >= alphabet.len() {
+                    out.push(alphabet[(pos + 13) % 26]);
+                } else {
+                    out.push(alphabet[pos + 13])
+                }
+            } else {
+                let pos = upper_alphabet.iter().position(|y| x == *y).unwrap();
+                if pos + 13 >= upper_alphabet.len() {
+                    out.push(upper_alphabet[(pos + 13) % 26]);
+                } else {
+                    out.push(upper_alphabet[pos + 13])
+                }
+            }
+        }
+    }
+    return out;
+}
