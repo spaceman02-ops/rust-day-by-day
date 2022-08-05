@@ -4,7 +4,10 @@ fn main() {
     input.sort();
     let commands: Vec<Vec<&str>> = input.iter().map(|x| x.split(" -> ").collect()).collect();
     let mut signals: HashMap<&str, u16> = HashMap::new();
-    for c in commands.iter() {
+    let q: Vec<Vec<&str>>;
+    q.push(commands[0]);
+    while (q.len() > 0) {
+        let c = q.pop().unwrap();
         let ex = c[0];
         let params: Vec<&str> = ex.split(" ").collect();
         match params.len() {
@@ -13,9 +16,18 @@ fn main() {
                 ()
             }
             2 => {
-                let val = signals.get(params[1]).unwrap().clone();
-                let val = !val;
-                signals.insert(c[1], val);
+                let val = signals.get(params[1]);
+                match val {
+                    Some(val) => {
+                        let val = !val;
+                        signals.insert(c[1], val);
+                    }
+                    None => {
+                        signals.insert(c[1]);
+                        ();
+                    }
+                }
+
                 ()
             }
             3 => {
